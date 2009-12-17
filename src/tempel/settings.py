@@ -23,7 +23,6 @@ USE_I18N = False
 
 import os
 MEDIA_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'media')
-print "Media root:", MEDIA_ROOT
 MEDIA_URL = '/media/'
 ADMIN_MEDIA_PREFIX = '/media/'
 
