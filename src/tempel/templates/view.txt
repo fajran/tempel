@@ -1,1 +1,1 @@
-{{ entry.content }}
+{% autoescape off %}{{ entry.content }}{% endautoescape %}
