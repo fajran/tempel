@@ -26,7 +26,6 @@ def index(request):
 
     else:
         form = EntryForm()
-            
 
     return render_to_response('index.html', {
         'form': form})

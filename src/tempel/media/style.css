@@ -1,1 +1,14 @@
-body { background: yellow; }
+body {
+    font-family: "gill sans", "trebuchet ms", sans-serif;
+    margin: 20px;
+    background: #EDE6D4;
+}
+
+#new label {
+    padding-right: 10px;
+}
+#new textarea {
+    width: 650px;
+    height: 300px;
+    padding: 5px;
+}
