@@ -7,7 +7,7 @@ import tempel
 setup(
     name = "tempel",
     version = tempel.__version__,
-    url = 'http://bitbucket.org/fajran/tempel/',
+    url = 'http://github.com/fajran/tempel/',
     license = 'AGPL',
     description = 'Tempel sana tempel sini',
     author = 'Fajran Iman Rusadi',
