@@ -64,9 +64,25 @@ INSTALLED_APPS = (
 )
 
 LANGUAGE_LIST = (
-    ('python', 'Python'),
+    ('bash', 'Bash'),
     ('c', 'C'),
     ('cpp', 'C++'),
+    ('css', 'CSS'),
+    ('diff', 'Diff'),
+    ('html', 'HTML'),
+    ('html+django', 'HTML+Django'),
+    ('ini', 'INI'),
+    ('java', 'Java'),
+    ('lua', 'Lua'),
+    ('make', 'Makefile'),
+    ('perl', 'Perl'),
+    ('php', 'PHP'),
+    ('python', 'Python'),
+    ('rst', 'reStructuredText'),
     ('ruby', 'Ruby'),
+    ('sql', 'SQL'),
+    ('text', 'Plain text'),
+    ('xml', 'XML'),
+    ('yaml', 'YAML'),
 )
 
