@@ -3,6 +3,10 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.conf import settings
 from django import forms
 
+from pygments import highlight
+from pygments.lexers import get_lexer_by_name
+from pygments.formatters import HtmlFormatter
+
 from tempel.models import Entry
 
 languages = {}
@@ -36,13 +40,17 @@ def view(request, id, mode='html'):
     if not entry.active:
         raise Http404()
 
+    data = {'entry': entry,
+            'language': languages[entry.language]}
+
     if mode == 'txt':
         ct = 'text/plain'
     else:
         ct = 'text/html'
+        data['content'] = highlight(entry.content,
+                                    get_lexer_by_name(entry.language),
+                                    HtmlFormatter(linenos=True))
 
     return render_to_response('view.%s' % mode,
-        {'entry': entry,
-         'language': languages[entry.language]},
-        mimetype=ct)
+                              data, mimetype=ct)
 

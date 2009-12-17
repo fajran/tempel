@@ -1,2 +1,10 @@
+<html><head>
+<link rel="stylesheet" type="text/css" href="/+media/style.css"/>
+<link rel="stylesheet" type="text/css" href="/+media/pastie.css"/>
+</head><body>
 <p>Language: {{ language }}</p>
-<p>{{ entry.content }}</p>
+<div class="pastie">
+{% autoescape off %}{{ content }}{% endautoescape %}
+</div>
+<p><a href="/{{ entry.id }}.txt">raw format</a></p>
+</body></html>
