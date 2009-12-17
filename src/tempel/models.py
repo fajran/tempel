@@ -8,3 +8,8 @@ class Entry(models.Model):
     created = models.DateTimeField(auto_now=True, auto_now_add=True)
     active = models.BooleanField(default=True)
 
+    class Meta:
+        ordering = ['-created']
+        verbose_name_plural = "entries"
+        
+
