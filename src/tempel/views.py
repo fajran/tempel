@@ -14,7 +14,8 @@ for k, v in settings.LANGUAGE_LIST:
     languages[k] = v
 
 class EntryForm(forms.Form):
-    language = forms.ChoiceField(choices=settings.LANGUAGE_LIST)
+    language = forms.ChoiceField(choices=settings.LANGUAGE_LIST,
+                                 initial="python")
     content = forms.CharField(widget=forms.Textarea)
 
 def index(request):
