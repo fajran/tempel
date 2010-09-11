@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     (r'^(?P<id>\d+)$', 'tempel.views.view', {'mode': 'html'}),
     (r'^(?P<id>\d+).html$', 'tempel.views.view', {'mode': 'html'}),
     (r'^(?P<id>\d+).txt$', 'tempel.views.view', {'mode': 'txt'}),
+    (r'^e/(?P<id>\d+)/download/$', 'tempel.views.download'),
     (r'^$', 'tempel.views.index'),
 )
 

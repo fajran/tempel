@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.conf import settings
 
@@ -45,4 +45,19 @@ def view(request, id, mode='html'):
 
     return render_to_response('view.%s' % mode,
                               data, mimetype=ct)
+
+def download(request, id):
+    entry = get_object_or_404(Entry, pk=int(id))
+
+    if not entry.active:
+        raise Http404()
+
+    data = {'entry': entry,
+            'language': entry.get_language()}
+
+    response = HttpResponse(entry.content)
+    response['Content-Disposition'] = 'attachment; filename=%s' % entry.get_filename()
+    response['Content-Type'] = entry.get_mimetype()
+
+    return response
 
