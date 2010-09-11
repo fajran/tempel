@@ -62,26 +62,29 @@ INSTALLED_APPS = (
     'tempel',
 )
 
-LANGUAGE_LIST = (
-    ('bash', 'Bash'),
-    ('c', 'C'),
-    ('cpp', 'C++'),
-    ('css', 'CSS'),
-    ('diff', 'Diff'),
-    ('html', 'HTML'),
-    ('html+django', 'HTML+Django'),
-    ('ini', 'INI'),
-    ('java', 'Java'),
-    ('lua', 'Lua'),
-    ('make', 'Makefile'),
-    ('perl', 'Perl'),
-    ('php', 'PHP'),
-    ('python', 'Python'),
-    ('rst', 'reStructuredText'),
-    ('ruby', 'Ruby'),
-    ('sql', 'SQL'),
-    ('text', 'Plain text'),
-    ('xml', 'XML'),
-    ('yaml', 'YAML'),
-)
+def t(name, label, ext='txt', mime='text/plain'):
+    return {'name': name, 'label': label, 'mime': mime, 'ext': ext}
+
+TEMPEL_LANGUAGES = [
+    t('bash',        'Bash',             'sh',       'text/x-sh'),
+    t('c',           'C',                'c',        'text/x-csrc'),
+    t('cpp',         'C++',              'cpp',      'text/x-c++src'),
+    t('css',         'CSS',              'css',      'text/css'),
+    t('diff',        'Diff',             'diff',     'text/x-diff'),
+    t('html',        'HTML',             'html',     'text/html'),
+    t('html+django', 'HTML+Django',      'html',     'text/html'),
+    t('ini',         'INI',              'ini',      'text/plain'),
+    t('java',        'Java',             'java',     'text/x-java'),
+    t('lua',         'Lua',              'lua',      'text/plain'),
+    t('make',        'Makefile',         'makefile', 'text/plain'),
+    t('perl',        'Perl',             'pl',       'text/x-perl'),
+    t('php',         'PHP',              'php',      'application/x-httpd-php'),
+    t('python',      'Python',           'py',       'text/x-python'),
+    t('rst',         'reStructuredText', 'rst',      'text/plain'),
+    t('ruby',        'Ruby',             'rb',       'application/x-ruby'),
+    t('sql',         'SQL',              'sql',      'text/plain'),
+    t('text',        'Plain text',       'txt',      'text/plain'),
+    t('xml',         'XML',              'xml',      'application/xml'),
+    t('yaml',        'YAML',             'yaml',     'text/plain'),
+]
 
