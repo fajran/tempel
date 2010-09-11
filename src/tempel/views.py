@@ -9,10 +9,6 @@ from pygments.formatters import HtmlFormatter
 from tempel.forms import EntryForm
 from tempel.models import Entry
 
-languages = {}
-for k, v in settings.LANGUAGE_LIST:
-    languages[k] = v
-
 def index(request):
     if request.method == 'POST':
         form = EntryForm(request.POST)
@@ -37,7 +33,7 @@ def view(request, id, mode='html'):
         raise Http404()
 
     data = {'entry': entry,
-            'language': languages[entry.language]}
+            'language': entry.get_language()}
 
     if mode == 'txt':
         ct = 'text/plain'
