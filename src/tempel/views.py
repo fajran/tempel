@@ -1,23 +1,17 @@
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.conf import settings
-from django import forms
 
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
 
+from tempel.forms import EntryForm
 from tempel.models import Entry
-from tempel import utils
 
 languages = {}
 for k, v in settings.LANGUAGE_LIST:
     languages[k] = v
-
-class EntryForm(forms.Form):
-    language = forms.ChoiceField(choices=utils.get_languages(),
-                                 initial="python")
-    content = forms.CharField(widget=forms.Textarea)
 
 def index(request):
     if request.method == 'POST':
