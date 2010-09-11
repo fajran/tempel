@@ -13,5 +13,17 @@ class Entry(models.Model):
     class Meta:
         ordering = ['-created']
         verbose_name_plural = "entries"
-        
+
+    def get_language(self):
+        return utils.get_language(self.language)
+
+    def get_mimetype(self):
+        return utils.get_mimetype(self.language)
+
+    def get_filename(self):
+        return '%s.%s' % (self.id, self.get_extension())
+
+    def get_extension(self):
+        return utils.get_extension(self.language)
+
 
