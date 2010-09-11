@@ -23,8 +23,7 @@ def index(request):
     else:
         form = EntryForm()
 
-    return render_to_response('index.html', {
-        'form': form})
+    return render_to_response('index.html', {'form': form})
 
 def view(request, id, mode='html'):
     entry = get_object_or_404(Entry, pk=int(id))
@@ -56,7 +55,8 @@ def download(request, id):
             'language': entry.get_language()}
 
     response = HttpResponse(entry.content)
-    response['Content-Disposition'] = 'attachment; filename=%s' % entry.get_filename()
+    response['Content-Disposition'] = 'attachment; filename=%s' % \
+                                        entry.get_filename()
     response['Content-Type'] = entry.get_mimetype()
 
     return response
