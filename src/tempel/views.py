@@ -8,13 +8,14 @@ from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
 
 from tempel.models import Entry
+from tempel import utils
 
 languages = {}
 for k, v in settings.LANGUAGE_LIST:
     languages[k] = v
 
 class EntryForm(forms.Form):
-    language = forms.ChoiceField(choices=settings.LANGUAGE_LIST,
+    language = forms.ChoiceField(choices=utils.get_languages(),
                                  initial="python")
     content = forms.CharField(widget=forms.Textarea)
 
