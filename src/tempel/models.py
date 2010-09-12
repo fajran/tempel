@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.conf import settings
 
@@ -7,7 +9,7 @@ class Entry(models.Model):
     content = models.TextField()
     language = models.CharField(max_length=20,
                                 choices=utils.get_languages())
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(default=datetime.now)
     active = models.BooleanField(default=True)
 
     class Meta:
