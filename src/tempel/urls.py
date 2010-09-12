@@ -5,7 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^\+media/(?P<path>.*)$', 'django.views.static.serve', 
+    (r'^\+media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': settings.MEDIA_ROOT}),
     (r'^admin/', include(admin.site.urls)),
     url(r'^(?P<id>\d+)$', 'tempel.views.view', {'mode': 'html'}, name='tempel_view'),
