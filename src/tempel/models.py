@@ -34,6 +34,15 @@ class Entry(models.Model):
     def get_extension(self):
         return utils.get_extension(self.language)
 
+    def done_editable(self):
+        self.edit_token = None
+        self.save()
+
+    def is_editable(self, token):
+        time_ok = self.edit_expires is not None and self.edit_expires >= datetime.now()
+        token_ok = token == self.edit_token
+        return time_ok and time_ok
+
     def __unicode__(self):
         return '<Entry: id=%s lang=%s>' % (self.id, self.language)
 
