@@ -22,12 +22,11 @@ def index(request):
             entry.language = form.cleaned_data['language']
             entry.save()
 
-            token = utils.create_token()
             age = 60 * settings.TEMPEL_EDIT_AGE
 
             edit = EditToken()
             edit.entry = entry
-            edit.token = token
+            edit.token = utils.create_token()
             edit.expires = datetime.now() + timedelta(seconds=age)
             edit.save()
 
@@ -35,7 +34,7 @@ def index(request):
 
             response = HttpResponse(status=302)
             response['Location'] = path
-            response.set_cookie('token', token, max_age=age, path=path)
+            response.set_cookie('token', edit.token, max_age=age, path=path)
 
             return response
 
