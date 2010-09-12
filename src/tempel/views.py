@@ -18,6 +18,7 @@ def index(request):
         form = EntryForm(request.POST)
         if form.is_valid():
             entry = Entry()
+            entry.ip = request.META['REMOTE_ADDR']
             entry.content = form.cleaned_data['content']
             entry.language = form.cleaned_data['language']
             entry.save()

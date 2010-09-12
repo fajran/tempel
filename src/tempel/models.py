@@ -9,6 +9,8 @@ def default_edit_expires():
     return datetime.now() + timedelta(seconds=60*settings.TEMPEL_EDIT_AGE)
 
 class Entry(models.Model):
+    ip = models.IPAddressField(null=True)
+
     content = models.TextField()
     language = models.CharField(max_length=20,
                                 choices=utils.get_languages())
