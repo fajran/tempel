@@ -40,7 +40,7 @@ class Entry(models.Model):
 
     def is_editable(self, token):
         time_ok = self.edit_expires is not None and self.edit_expires >= datetime.now()
-        token_ok = token == self.edit_token
+        token_ok = self.edit_token is not None and token == self.edit_token
         return time_ok and time_ok
 
     def __unicode__(self):
