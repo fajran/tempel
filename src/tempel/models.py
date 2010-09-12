@@ -1,9 +1,12 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django.db import models
 from django.conf import settings
 
 from tempel import utils
+
+def default_edit_expires():
+    return datetime.now() + timedelta(seconds=60*settings.TEMPEL_EDIT_AGE)
 
 class Entry(models.Model):
     content = models.TextField()
@@ -11,6 +14,9 @@ class Entry(models.Model):
                                 choices=utils.get_languages())
     created = models.DateTimeField(default=datetime.now)
     active = models.BooleanField(default=True)
+
+    edit_token = models.CharField(max_length=8, default=utils.create_token, null=True)
+    edit_expires = models.DateTimeField(default=default_edit_expires, null=True)
 
     class Meta:
         ordering = ['-created']
@@ -31,11 +37,3 @@ class Entry(models.Model):
     def __unicode__(self):
         return '<Entry: id=%s lang=%s>' % (self.id, self.language)
 
-class EditToken(models.Model):
-    entry = models.ForeignKey(Entry, unique=True)
-    token = models.CharField(max_length=8)
-
-    expires = models.DateTimeField()
-
-    def __unicode__(self):
-        return '<EditToken: entry=%s token=%s>' % (self.entry_id, self.token)
