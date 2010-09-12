@@ -21,18 +21,3 @@ def get_extension(name):
 def create_token():
     return str(uuid.uuid4()).split('-')[0]
 
-def is_editable(entry, token):
-    from tempel.models import EditToken
-
-    try:
-        edit = EditToken.objects.get(entry=entry)
-        if token is None:
-            edit.delete()
-        elif edit.expires < datetime.now():
-            edit.delete()
-        else:
-            return True
-        return False
-    except EditToken.DoesNotExist:
-        return False
-
