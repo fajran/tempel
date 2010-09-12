@@ -6,6 +6,6 @@
 <div class="pastie">
 {% autoescape off %}{{ content }}{% endautoescape %}
 </div>
-<p><a href="/{{ entry.id }}.txt">raw format</a> &ndash;
-    <a href="/e/{{ entry.id }}/download/">download</a></p>
+<p><a href="{% url tempel_raw entry.id %}">raw format</a> &ndash;
+    <a href="{% url tempel_download entry.id %}">download</a></p>
 </body></html>

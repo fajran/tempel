@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.conf import settings
+from django.core.urlresolvers import reverse
 
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
@@ -18,7 +19,7 @@ def index(request):
             entry.language = form.cleaned_data['language']
             entry.save()
 
-            return HttpResponseRedirect('/%d' % entry.id)
+            return HttpResponseRedirect(reverse('tempel_view', args=[entry.id]))
 
     else:
         form = EntryForm()
