@@ -11,8 +11,10 @@ urlpatterns = patterns('',
     url(r'^(?P<id>\d+)$', 'tempel.views.view', {'mode': 'html'}, name='tempel_view'),
     url(r'^(?P<id>\d+).html$', 'tempel.views.view', {'mode': 'html'}, name='tempel_html'),
     url(r'^(?P<id>\d+).txt$', 'tempel.views.view', {'mode': 'txt'}, name='tempel_raw'),
-    url(r'^e/(?P<id>\d+)/download/$', 'tempel.views.download', name='tempel_download'),
-    url(r'^e/(?P<id>\d+)/edit/(?P<token>\w{8})/$', 'tempel.views.edit', name='tempel_edit'),
+
+    url(r'^entry/(?P<id>\d+)/download/$', 'tempel.views.download', name='tempel_download'),
+    url(r'^entry/(?P<id>\d+)/edit/(?P<token>\w{8})/$', 'tempel.views.edit', name='tempel_edit'),
+
     url(r'^$', 'tempel.views.index', name='tempel_index'),
 )
 
