@@ -75,6 +75,9 @@ def view(request, id, mode='html'):
     if not entry.active:
         raise Http404()
 
+    if request.GET.has_key('download'):
+        return HttpResponseRedirect(reverse('tempel_download', args=[entry.id]))
+
     editable = utils.is_editable(entry, request.COOKIES.get('token', None))
 
     data = {'entry': entry,
