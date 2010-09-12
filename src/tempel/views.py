@@ -41,9 +41,7 @@ def edit(request, id, token):
     if not entry.active:
         raise Http404()
 
-    editable = utils.is_editable(entry, token)
-    print 'editable:', editable
-    if not editable:
+    if not entry.is_editable(token):
         return HttpResponse(status=403)
 
     if request.method == 'POST':
@@ -70,12 +68,15 @@ def view(request, id, mode='html'):
     if request.GET.has_key('download'):
         return HttpResponseRedirect(reverse('tempel_download', args=[entry.id]))
 
-    editable = utils.is_editable(entry, request.COOKIES.get('token', None))
+    edit_token = request.COOKIES.get('token', None)
+    editable = entry.is_editable(edit_token)
+    if not editable and entry.edit_token is not None:
+        entry.done_editable()
 
     data = {'entry': entry,
             'language': entry.get_language(),
             'editable': editable,
-            'token': request.COOKIES.get('token', None)}
+            'token': edit_token}
 
     if mode == 'txt':
         ct = 'text/plain'
