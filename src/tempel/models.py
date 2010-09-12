@@ -43,7 +43,7 @@ class Entry(models.Model):
     def is_editable(self, token):
         time_ok = self.edit_expires is not None and self.edit_expires >= datetime.now()
         token_ok = self.edit_token is not None and token == self.edit_token
-        return time_ok and time_ok
+        return time_ok and token_ok
 
     def __unicode__(self):
         return '<Entry: id=%s lang=%s>' % (self.id, self.language)
