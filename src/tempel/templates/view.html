@@ -7,5 +7,9 @@
 {% autoescape off %}{{ content }}{% endautoescape %}
 </div>
 <p><a href="{% url tempel_raw entry.id %}">raw format</a> &ndash;
-    <a href="{% url tempel_download entry.id %}">download</a></p>
+    <a href="{% url tempel_download entry.id %}">download</a>
+{% if editable %}
+    &ndash; <a href="{% url tempel_edit entry.id token %}">edit</a>
+{% endif %}
+    </p>
 </body></html>

@@ -88,3 +88,5 @@ TEMPEL_LANGUAGES = [
     t('yaml',        'YAML',             'yaml',     'text/plain'),
 ]
 
+TEMPEL_EDIT_AGE = 5 # minutes
+

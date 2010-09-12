@@ -29,3 +29,11 @@ class Entry(models.Model):
     def __unicode__(self):
         return '<Entry: id=%s lang=%s>' % (self.id, self.language)
 
+class EditToken(models.Model):
+    entry = models.ForeignKey(Entry, unique=True)
+    token = models.CharField(max_length=8)
+
+    expires = models.DateTimeField()
+
+    def __unicode__(self):
+        return '<EditToken: entry=%s token=%s>' % (self.entry_id, self.token)
