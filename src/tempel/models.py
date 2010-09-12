@@ -26,4 +26,6 @@ class Entry(models.Model):
     def get_extension(self):
         return utils.get_extension(self.language)
 
+    def __unicode__(self):
+        return '<Entry: id=%s lang=%s>' % (self.id, self.language)
 
