@@ -10,7 +10,7 @@ from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
 
 from tempel.forms import EntryForm
-from tempel.models import Entry, EditToken
+from tempel.models import Entry
 from tempel import utils
 
 def index(request):
@@ -23,18 +23,11 @@ def index(request):
             entry.save()
 
             age = 60 * settings.TEMPEL_EDIT_AGE
-
-            edit = EditToken()
-            edit.entry = entry
-            edit.token = utils.create_token()
-            edit.expires = datetime.now() + timedelta(seconds=age)
-            edit.save()
-
             path = reverse('tempel_view', args=[entry.id])
 
             response = HttpResponse(status=302)
             response['Location'] = path
-            response.set_cookie('token', edit.token, max_age=age, path=path)
+            response.set_cookie('token', entry.edit_token, max_age=age, path=path)
 
             return response
 
