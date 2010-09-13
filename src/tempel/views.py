@@ -60,7 +60,7 @@ def edit(request, id, token):
 
     return render_to_response('edit.html', {'form': form})
 
-def view(request, id, mode='html'):
+def _view(request, id, mode='html', private_token=None):
     entry = get_object_or_404(Entry, pk=int(id))
 
     if not entry.active:
@@ -89,6 +89,9 @@ def view(request, id, mode='html'):
 
     return render_to_response('view.%s' % mode,
                               data, mimetype=ct)
+
+def view(request, id, mode='html'):
+    return _view(request, id, mode, None)
 
 def download(request, id):
     entry = get_object_or_404(Entry, pk=int(id))
