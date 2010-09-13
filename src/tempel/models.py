@@ -20,6 +20,8 @@ class Entry(models.Model):
     edit_token = models.CharField(max_length=8, default=utils.create_token, null=True)
     edit_expires = models.DateTimeField(default=default_edit_expires, null=True)
 
+    private_token = models.CharField(max_length=8, default=None, null=True)
+
     class Meta:
         ordering = ['-created']
         verbose_name_plural = "entries"
