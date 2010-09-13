@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^(?P<id>\d+).(?P<private_token>\w{8}).txt$', 'tempel.views.private_view', {'mode': 'txt'}, name='tempel_private_raw'),
 
     url(r'^entry/(?P<id>\d+).(?P<private_token>\w{8})/download/$', 'tempel.views.private_download', name='tempel_private_download'),
+    url(r'^entry/(?P<id>\d+).(?P<private_token>\w{8})/edit/(?P<token>\w{8})/$', 'tempel.views.private_edit', name='tempel_private_edit'),
 
     url(r'^$', 'tempel.views.index', name='tempel_index'),
 )
