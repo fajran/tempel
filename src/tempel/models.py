@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 
 from django.db import models
 from django.conf import settings
+from django.core.urlresolvers import reverse
 
 from tempel import utils
 
@@ -49,4 +50,39 @@ class Entry(models.Model):
 
     def __unicode__(self):
         return '<Entry: id=%s lang=%s>' % (self.id, self.language)
+
+    def raw_url(self):
+        if self.private_token is None:
+            return reverse('tempel_raw', args=[self.id])
+        else:
+            return reverse('tempel_private_raw',
+                           args=[self.id, self.private_token])
+
+    def edit_url(self):
+        if self.edit_token is None or self.edit_expires is None:
+            return self.view_url()
+        elif self.private_token is None:
+            return reverse('tempel_edit', args=[self.id, self.edit_token])
+        else:
+            return reverse('tempel_private_edit',
+                           args=[self.id, self.private_token, self.edit_token])
+
+    def download_url(self):
+        if self.private_token is None:
+            return reverse('tempel_download', args=[self.id])
+        else:
+            return reverse('tempel_private_download',
+                           args=[self.id, self.private_token])
+
+    def download_url_short(self):
+        return '%s?download' % self.view_url()
+
+    def get_absolute_url(self):
+        if self.private_token is None:
+            return reverse('tempel_view', args=[self.id])
+        else:
+            return reverse('tempel_private_view',
+                           args=[self.id, self.private_token])
+
+    view_url = get_absolute_url
 
