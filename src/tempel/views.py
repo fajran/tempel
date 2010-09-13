@@ -17,10 +17,14 @@ def index(request):
     if request.method == 'POST':
         form = EntryForm(request.POST)
         if form.is_valid():
+            private = form.cleaned_data['private']
+
             entry = Entry()
             entry.ip = request.META['REMOTE_ADDR']
             entry.content = form.cleaned_data['content']
             entry.language = form.cleaned_data['language']
+            if private:
+                entry.private_token = utils.create_token()
             entry.save()
 
             age = 60 * settings.TEMPEL_EDIT_AGE
