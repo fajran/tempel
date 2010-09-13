@@ -18,8 +18,10 @@ class Entry(models.Model):
     created = models.DateTimeField(default=datetime.now)
     active = models.BooleanField(default=True)
 
-    edit_token = models.CharField(max_length=8, default=utils.create_token, null=True)
-    edit_expires = models.DateTimeField(default=default_edit_expires, null=True)
+    edit_token = models.CharField(max_length=8, default=utils.create_token,
+                                  null=True)
+    edit_expires = models.DateTimeField(default=default_edit_expires,
+                                        null=True)
 
     private_token = models.CharField(max_length=8, default=None, null=True)
 
@@ -44,7 +46,8 @@ class Entry(models.Model):
         self.save()
 
     def is_editable(self, token):
-        time_ok = self.edit_expires is not None and self.edit_expires >= datetime.now()
+        time_ok = self.edit_expires is not None \
+                  and self.edit_expires >= datetime.now()
         token_ok = self.edit_token is not None and token == self.edit_token
         return time_ok and token_ok
 

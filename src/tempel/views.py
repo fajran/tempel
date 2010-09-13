@@ -32,7 +32,8 @@ def index(request):
 
             response = HttpResponse(status=302)
             response['Location'] = path
-            response.set_cookie('token', entry.edit_token, max_age=age, path=path)
+            response.set_cookie('token', entry.edit_token,
+                                max_age=age, path=path)
 
             return response
 
