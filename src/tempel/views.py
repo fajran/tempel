@@ -63,6 +63,9 @@ def _edit(request, id, token, private_token=None):
 def edit(request, id, token):
     return _edit(request, id, token, None)
 
+def private_edit(request, id, private_token, token):
+    return _edit(request, id, token, private_token)
+
 def _view(request, id, mode='html', private_token=None):
     entry = get_object_or_404(Entry, pk=int(id), private_token=private_token)
 
