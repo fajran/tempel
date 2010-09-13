@@ -28,7 +28,7 @@ def index(request):
             entry.save()
 
             age = 60 * settings.TEMPEL_EDIT_AGE
-            path = reverse('tempel_view', args=[entry.id])
+            path = entry.view_url()
 
             response = HttpResponse(status=302)
             response['Location'] = path
@@ -56,7 +56,7 @@ def _edit(request, id, token, private_token=None):
             entry.content = form.cleaned_data['content']
             entry.save()
 
-            return HttpResponseRedirect(reverse('tempel_view', args=[entry.id]))
+            return HttpResponseRedirect(entry.view_url())
     else:
         data = {'language': entry.language,
                 'content': entry.content}
@@ -77,7 +77,7 @@ def _view(request, id, mode='html', private_token=None):
         raise Http404()
 
     if request.GET.has_key('download'):
-        return HttpResponseRedirect(reverse('tempel_download', args=[entry.id]))
+        return HttpResponseRedirect(entry.download_url())
 
     edit_token = request.COOKIES.get('token', None)
     editable = entry.is_editable(edit_token)
