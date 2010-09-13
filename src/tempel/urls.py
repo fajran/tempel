@@ -15,6 +15,8 @@ urlpatterns = patterns('',
     url(r'^entry/(?P<id>\d+)/download/$', 'tempel.views.download', name='tempel_download'),
     url(r'^entry/(?P<id>\d+)/edit/(?P<token>\w{8})/$', 'tempel.views.edit', name='tempel_edit'),
 
+    url(r'^entry/(?P<id>\d+).(?P<private_token>\w{8})/download/$', 'tempel.views.private_download', name='tempel_private_download'),
+
     url(r'^$', 'tempel.views.index', name='tempel_index'),
 )
 

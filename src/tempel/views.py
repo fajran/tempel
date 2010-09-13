@@ -112,3 +112,6 @@ def _download(request, id, private_token=None):
 def download(request, id):
     return _download(request, id, None)
 
+def private_download(request, id, private_token):
+    return _download(request, id, private_token)
+
