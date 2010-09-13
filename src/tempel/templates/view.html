@@ -6,10 +6,10 @@
 <div class="pastie">
 {% autoescape off %}{{ content }}{% endautoescape %}
 </div>
-<p><a href="{% url tempel_raw entry.id %}">raw format</a> &ndash;
-    <a href="{% url tempel_view entry.id %}?download">download</a>
+<p><a href="{{ entry.raw_url }}">raw format</a> &ndash;
+    <a href="{{ entry.download_url_short }}">download</a>
 {% if editable %}
-    &ndash; <a href="{% url tempel_edit entry.id token %}">edit</a>
+    &ndash; <a href="{{ entry.edit_url }}">edit</a>
 {% endif %}
     </p>
 </body></html>
