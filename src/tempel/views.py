@@ -9,7 +9,7 @@ from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
 
-from tempel.forms import EntryForm
+from tempel.forms import EntryForm, EditForm
 from tempel.models import Entry
 from tempel import utils
 
@@ -46,7 +46,7 @@ def _edit(request, id, token, private_token=None):
         return HttpResponse(status=403)
 
     if request.method == 'POST':
-        form = EntryForm(request.POST)
+        form = EditForm(request.POST)
         if form.is_valid():
             entry.language = form.cleaned_data['language']
             entry.content = form.cleaned_data['content']
@@ -56,7 +56,7 @@ def _edit(request, id, token, private_token=None):
     else:
         data = {'language': entry.language,
                 'content': entry.content}
-        form = EntryForm(data)
+        form = EditForm(data)
 
     return render_to_response('edit.html', {'form': form})
 
