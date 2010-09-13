@@ -89,3 +89,10 @@ class Entry(models.Model):
 
     view_url = get_absolute_url
 
+    def duplicate_url(self):
+        if self.private_token is None:
+            entry_id = str(self.id)
+        else:
+            entry_id = '%s.%s' % (self.id, self.private_token)
+        return '%s?duplicate=%s' % (reverse('tempel_index'), entry_id)
+
