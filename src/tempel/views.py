@@ -96,6 +96,9 @@ def _view(request, id, mode='html', private_token=None):
 def view(request, id, mode='html'):
     return _view(request, id, mode, None)
 
+def private_view(request, id, private_token, mode='html'):
+    return _view(request, id, mode, private_token)
+
 def _download(request, id, private_token=None):
     entry = get_object_or_404(Entry, pk=int(id))
 
