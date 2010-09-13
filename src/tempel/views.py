@@ -13,6 +13,32 @@ from tempel.forms import EntryForm, EditForm
 from tempel.models import Entry
 from tempel import utils
 
+def _get_initial(entry_id):
+    if entry_id is None:
+        return {}
+
+    id = None
+    private_token = None
+
+    p = entry_id.split('.')
+    if len(p) >= 1:
+        id = int(p[0])
+    if len(p) >= 2:
+        private_token = p[1]
+
+    if id is None:
+        return {}
+    if private_token is not None and len(private_token) != 8:
+        return {}
+
+    try:
+        entry = Entry.objects.get(pk=id, private_token=private_token)
+        return {'content': entry.content,
+                'language': entry.language,
+                'private': private_token is not None}
+    except Entry.DoesNotExist:
+        return {}
+
 def index(request):
     if request.method == 'POST':
         form = EntryForm(request.POST)
@@ -38,7 +64,8 @@ def index(request):
             return response
 
     else:
-        form = EntryForm()
+        initial = _get_initial(request.GET.get('duplicate', None))
+        form = EntryForm(initial)
 
     return render_to_response('index.html', {'form': form})
 
