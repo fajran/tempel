@@ -93,7 +93,7 @@ def _view(request, id, mode='html', private_token=None):
 def view(request, id, mode='html'):
     return _view(request, id, mode, None)
 
-def download(request, id):
+def _download(request, id, private_token=None):
     entry = get_object_or_404(Entry, pk=int(id))
 
     if not entry.active:
@@ -108,4 +108,7 @@ def download(request, id):
     response['Content-Type'] = entry.get_mimetype()
 
     return response
+
+def download(request, id):
+    return _download(request, id, None)
 
