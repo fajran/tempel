@@ -38,7 +38,7 @@ def index(request):
     return render_to_response('index.html', {'form': form})
 
 def _edit(request, id, token, private_token=None):
-    entry = get_object_or_404(Entry, pk=int(id))
+    entry = get_object_or_404(Entry, pk=int(id), private_token=private_token)
     if not entry.active:
         raise Http404()
 
@@ -64,7 +64,7 @@ def edit(request, id, token):
     return _edit(request, id, token, None)
 
 def _view(request, id, mode='html', private_token=None):
-    entry = get_object_or_404(Entry, pk=int(id))
+    entry = get_object_or_404(Entry, pk=int(id), private_token=private_token)
 
     if not entry.active:
         raise Http404()
@@ -100,7 +100,7 @@ def private_view(request, id, private_token, mode='html'):
     return _view(request, id, mode, private_token)
 
 def _download(request, id, private_token=None):
-    entry = get_object_or_404(Entry, pk=int(id))
+    entry = get_object_or_404(Entry, pk=int(id), private_token=private_token)
 
     if not entry.active:
         raise Http404()
